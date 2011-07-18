@@ -1,0 +1,48 @@
+<%= javascript_include_tag 'shadowbox' %>
+
+
+<form >
+  <%= text_field_tag :item_number, params[:item_number], :placeholder => 'Enter Item #' %>
+  <input type="button" value="Go" onClick="getItem()">
+<form>
+  
+<script type="text/javascript">
+
+function getItem(){
+  // grab id
+  id = $('#item_number').val();
+  // remove the div
+  $('.item_photo_list').slideUp("normal", function() { $(this).remove(); } );
+  
+  $.getJSON('photos.json?item_number='+id, function(data) {
+    
+    if(data.length == 0)
+    {
+      
+      $('<div/>', {
+        'class': 'item_photo_list',
+        'id':id,
+        html: '<div style="background-color:pink">no photo for this item or invalid item number</div>'
+      }).appendTo('body');
+    }
+    else{
+      // create an anchor tag for each photo
+      var items = [];
+      $.each(data, function(key, val) {
+        content = '<a href="'+val+'" rel="shadowbox[item]"> <img src="'+val+'" width="150px" height="150px"/></a>';
+        items.push( content );
+      });
+
+      // display photos
+      $('<div/>', {
+        'class': 'item_photo_list',
+        'id':id,
+        html: items.join('')
+      }).appendTo('body');
+    
+      // setup shadowbox
+      Shadowbox.init();
+    }
+  });
+}
+</script>

@@ -9,8 +9,8 @@ class HomeController < ApplicationController
       else
         if session[:dropbox_session].nil? then # user landed with no previous dropbox_session
           logger.debug "no previous session available"
-          app_key = DROPBOX_CONFIG['app_key']
-          app_secret = DROPBOX_CONFIG['app_secret']
+          app_key = "tcu08l85y39ybxd" #DROPBOX_CONFIG['app_key']
+          app_secret = "3daxhdk2813pcng" #DROPBOX_CONFIG['app_secret']
           # create a new dropbox_session and save in session variable
           dropbox_session = Dropbox::Session.new(app_key, app_secret)
           session[:dropbox_session] = dropbox_session.serialize
@@ -28,6 +28,7 @@ class HomeController < ApplicationController
       end
     end
   
+    # respond to json request for photo paths
     def photos
       if session[:dropbox_session].nil? then
         logger.debug 'no previous session available'
@@ -39,24 +40,27 @@ class HomeController < ApplicationController
               
         if dropbox_session.authorized? then
           
-          @photos = Array.new
-          @itemNum = params[:item_number]
-          begin
-          metadata = dropbox_session.list('/public/%s' % @itemNum)
+          photos = Array.new
           
-          metadata.each do |photo|
-            path = photo['path']
-            path['/Public'] = 'http://dl.dropbox.com/u/8319978'
-            @photos.push path
-          end
+          begin
+            metadata = dropbox_session.list('/public/%s' % params[:item_number])
+            # photoStruct = Struct.new(:path, :width, :height)
+            metadata.each do |photo|
+              logger.debug photo.inspect
+              path = photo['path']
+              path['/Public'] = 'http://dl.dropbox.com/u/8319978'
+              # width = photo['width']
+              # height = photo['height']
+              photos.push path
+            end
           rescue
-            
+            # do nothing for now... need to handle dropbox error
           end
         end
       end
       
       respond_to do |format|
-        format.json { render :json => @photos.to_json }
+        format.json { render :json => photos.to_json }
       end
     end
     

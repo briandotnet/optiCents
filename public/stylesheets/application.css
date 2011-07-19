@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+article {
+  margin: 0 auto;
+  width: 800px;
+}
+
+body {
+  font: 16px/1 Calibri, Helvetica, Arial, sans-serif;
+}
+
+header {
+  height: 50px;
+  line-height: 50px;
+  background-color: #222;
+  color: #eee;
+  text-align: center;
+}
+
+
+
+  /***************************/
+ /****   NOTIFICATIONS   ****/
+/***************************/
+#messaging {
+  height: 0;
+  line-height: 30px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0,0,0,0.5)),
+    color-stop(10%, rgba(0,0,0,0))
+  );
+  opacity: 0;
+  text-align: center;
+  -webkit-transition-property: height, opacity, background-color;
+  -webkit-transition-duration: 0.25s;
+  -webkit-transition-timing-function: ease-out;
+}
+
+#messaging.error,
+#messaging.success {
+  height: 30px;
+  opacity: 1;
+}
+
+#messaging.error {
+  color: #900;
+  background-color: #f99;
+}
+
+
+
+  /*************************/
+ /****   LOOKUP FORM   ****/
+/*************************/
+#itemLookup > fieldset {
+  border: 0;
+  padding: 10px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#eee),
+    to(#fff)
+  );
+  text-align: center;
+}
+
+#itemLookup input {
+  border: 1px solid transparent;
+  padding: 5px;
+  font-size: 30px;
+}
+
+#itemLookup input[type="text"] {
+  border-color: #ccc;
+}
+
+#itemLookup input[type="text"]:focus {
+  background-color: #ffc;
+  outline: 0;
+}
+
+#itemLookup input[type="submit"] {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#666),
+    to(#222)
+  );
+  color: #eee;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  cursor: pointer;
+}

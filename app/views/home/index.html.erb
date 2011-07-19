@@ -1,60 +1,8 @@
-<script src="http://www.gcmingati.net/wordpress/wp-content/lab/jquery/svwt/js/jquery.slideViewerPro.1.0.js" type="text/javascript"></script>
+<form id="itemLookup" method="get">
+  <fieldset>
+    <%= text_field_tag :itemNumber, params[:n], :placeholder => 'Enter Item #' %>
+    <input type="submit" value="Go">
+  </fieldset>
+</form>
 
-<form >
-  <%= text_field_tag :item_number, params[:item_number], :placeholder => 'Enter Item #' %>
-  <input type="button" value="Go" onClick="getItem()">
-<form>
-  <div id="gallery_container">
-  </div>
-<script type="text/javascript">
-
-function getItem(){
-  // grab id from the textbox
-  id = $('#item_number').val();
-  // empty the content from the container then reconstruct 
-  $('div#gallery_container').empty();
-  $('<div/>',{'id':'gallery','class':'svwp'}).appendTo('div#gallery_container');
-  
-  $.getJSON('photos.json?item_number='+id, function(data) {
-    if(data.length == 0)
-    {
-      
-      $('<div/>', {
-        'id':id,
-        html: '<div style="background-color:pink">no photo for this item or invalid item number</div>'
-      }).appendTo('div#gallery');
-    }
-    else{
-      // create an anchor tag for each photo
-      var items = [];
-      $.each(data, function(key, val) {
-        content = '<li><img src="'+val+'" width="700px" height="500px"/></li>';
-        items.push( content );
-      });
-
-      // display photos
-      $('<ul/>', {
-        'id':id,
-        html: items.join('')
-      }).appendTo('div#gallery');
-    
-      // setup shadowbox
-      $("div#gallery").slideViewerPro({
-        thumbs: 5, 
-        thumbsPercentReduction: 15,
-        galBorderWidth: 0,
-        thumbsTopMargin: 10,
-        thumbsRightMargin: 10,
-        thumbsBorderWidth: 5,
-        thumbsActiveBorderColor: "white",
-        thumbsActiveBorderOpacity: 0.5,
-        thumbsBorderOpacity: 0,
-        buttonsTextColor: "#707070",
-        leftButtonInner: "<",
-        rightButtonInner: ">",
-        autoslide: false
-      });
-    }
-  });
-}
-</script>
+<div id="container"></div>

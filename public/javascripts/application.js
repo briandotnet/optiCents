@@ -8,7 +8,7 @@
     // always clear old messages
     msg.removeClass();
 
-    $.getJSON('photos.json?n=' + id, function( data ) {
+    $.getJSON('home/photos.json?n=' + id, function( data ) {
 
       // no results :(
       if( !data.length ) {
@@ -30,6 +30,7 @@
         gallery.slideViewerPro({
           thumbs: 5, 
           thumbsPercentReduction: 15,
+          buttonsWidth:10,
           galBorderWidth: 0,
           thumbsTopMargin: 10,
           thumbsRightMargin: 10,

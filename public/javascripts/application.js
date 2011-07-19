@@ -8,7 +8,7 @@
     // always clear old messages
     msg.removeClass();
 
-    $.getJSON('home/photos.json?n=' + id, function( data ) {
+    $.getJSON('/home/photos.json?n=' + id, function( data ) {
 
       // no results :(
       if( !data.length ) {

@@ -4,7 +4,14 @@ class HomeController < ApplicationController
     if params[:oauth_token] then # handles call back from dropbox
       logger.debug "handle call back"
       dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
-      dropbox_session.authorize(params)
+      begin 
+        if !dropbox_session.authorized? then 
+          dropbox_session.authorize(params)
+        end
+      rescue
+        # can't authorize, probably expired token, redirect to login
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index'))
+      end
       session[:dropbox_session] = dropbox_session.serialize # re-serialize the authenticated dropbox_session 
     else
       if session[:dropbox_session].nil? then # user landed with no previous dropbox_session

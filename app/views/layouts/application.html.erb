@@ -7,7 +7,10 @@
   <%= stylesheet_link_tag :all %>
 </head>
   <body>
-    <header><h1>Snap!</h1></header>
+    <header>
+      <h1>Snap!</h1>
+      <a id="logout" href="#">Logout</a>
+    </header>
     <div id="messaging"></div>
     <article><%= yield %></article>
     <%= javascript_include_tag 'jquery.min', 'slideViewerPro.1.0', 'application' %>

@@ -21,7 +21,22 @@ header {
   text-align: center;
 }
 
-
+  /*********************/
+ /****   LOGOUT   ****/
+/********************/
+#logout{
+  display:block; 
+  position: absolute; 
+  top: 0; 
+  right:0; 
+  width:100px; 
+  height:50px; 
+  color:white; 
+  text-decoration:none;
+}
+#logout:hover{
+  color:#F99;
+}
 
   /***************************/
  /****   NOTIFICATIONS   ****/

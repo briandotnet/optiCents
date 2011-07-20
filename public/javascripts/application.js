@@ -21,7 +21,7 @@
           gallery = $('<div/>', { id: 'gallery' });
 
         $.each(data, function( key, val ) {
-          items.push('<li><img src="' + val + '" width="320" height="320"></li>');
+          items.push('<li><img src="' + val + '" width="640" height="640"></li>');
         });
 
         $('<ul/>', { html: items.join('') }).appendTo(gallery);

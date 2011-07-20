@@ -69,14 +69,19 @@ header {
   background-color: #f99;
 }
 
-
+  /*********************/
+ /****   LOGOUT   ****/
+/********************/
+#container{
+  padding: 0 80px;
+}
 
   /*************************/
  /****   LOOKUP FORM   ****/
 /*************************/
 #itemLookup > fieldset {
   border: 0;
-  padding: 10px;
+  padding: 20px;
   background-image: -webkit-gradient(
     linear,
     left top,

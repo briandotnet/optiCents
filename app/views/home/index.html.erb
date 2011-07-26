@@ -1,8 +1,10 @@
-<form id="itemLookup" method="get">
-  <fieldset>
-    <%= text_field_tag :itemNumber, params[:n], :placeholder => 'Enter Item #' %>
-    <input type="submit" value="Go">
-  </fieldset>
-</form>
+<h2>All Items</h2>
+<%= link_to '', url_for(:controller => "home", :action => "item"), :id=>"search", :title=>"Search" %>
 
-<div id="container"></div>
+<ul id="itemsUl">
+  <% @items.each do |item|  %>
+    <li>
+      <%= link_to item, :controller => "home", :action => "item", :id=> item %>
+    </li>
+  <% end %>
+</ul>

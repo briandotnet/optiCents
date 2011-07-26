@@ -7,12 +7,17 @@
 
     // always clear old messages
     msg.removeClass();
+    
+    // slide up and empty container view
+    container.slideUp('slow', function(){container.empty});
 
     $.getJSON('/home/photos.json?n=' + id, function( data ) {
 
       // no results :(
       if( !data.length ) {
         msg.attr('class', 'error').html('No photos found for item <b>#' + id + '</b>!');
+        // hide delete link
+        $('#delete').hide();
       }
 
       // we have data!
@@ -26,7 +31,9 @@
 
         $('<ul/>', { html: items.join('') }).appendTo(gallery);
         container.empty().append(gallery);
-
+        // show delete button
+        $('#delete').show();
+        
         gallery.slideViewerPro({
           thumbs: 5, 
           thumbsPercentReduction: 15,
@@ -43,6 +50,8 @@
           rightButtonInner: ">",
           autoslide: false
         });
+        
+        container.slideDown('slow');
       }
     });
   };
@@ -51,7 +60,13 @@
   $(document).ready(function() {
     $('#itemLookup').submit(function( e ) {
       if( e ) { e.preventDefault(); }
-      getPhotos($('#itemNumber').val().trim());
+      if($('#itemNumber').val().trim().length > 0){
+        getPhotos($('#itemNumber').val().trim());
+      }
     });
+    // load item if id is already specified
+    if($('#itemNumber').val().trim().length > 0){
+      getPhotos($('#itemNumber').val().trim());
+    }
   });
 })(jQuery);

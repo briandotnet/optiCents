@@ -1,6 +1,15 @@
 class HomeController < ApplicationController
 
+  # respond to index request for all items list
   def index
+    @items = items
+    respond_to do |format|
+      format.html # render index.html.erb
+    end
+  end
+  
+  # respond to item request
+  def item
     if params[:oauth_token] then # handles call back from dropbox
       logger.debug "handle call back"
       dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
@@ -10,7 +19,7 @@ class HomeController < ApplicationController
         end
       rescue
         # can't authorize, probably expired token, redirect to login
-        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index'))
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item'))
       end
       session[:dropbox_session] = dropbox_session.serialize # re-serialize the authenticated dropbox_session 
     else
@@ -22,7 +31,7 @@ class HomeController < ApplicationController
         dropbox_session = Dropbox::Session.new(app_key, app_secret)
         session[:dropbox_session] = dropbox_session.serialize
 
-        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index'))
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item'))
       else # user landed with previous dropbox_session
         logger.debug "use previous session"
         dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
@@ -30,17 +39,22 @@ class HomeController < ApplicationController
         if !dropbox_session.authorized? then 
           # dropbox_session is not authorized
           logger.debug "redirect to dropbox oauth page"
-          redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index'))
+          redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item'))
         end
       end
     end
+    if params[:id] then
+      @id=params[:id]
+    end
+    #render item.html.erb
   end
+
 
   # respond to json request for photo paths
   def photos
     if session[:dropbox_session].nil? then
       logger.debug 'no previous session available'
-      return redirect_to(:controller => 'home', :action => 'index')
+      return redirect_to(:controller => 'home', :action => 'item')
     else
       logger.debug 'previous session found'
       dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
@@ -53,7 +67,7 @@ class HomeController < ApplicationController
           metadata = dropbox_session.list('/public/%s' % params[:n])
           # photoStruct = Struct.new(:path, :width, :height)
           metadata.each do |photo|
-            logger.debug photo.inspect
+            # logger.debug photo.inspect
             path = photo['path']
             path['/Public'] = 'http://dl.dropbox.com/u/8319978'
             # width = photo['width']
@@ -61,7 +75,7 @@ class HomeController < ApplicationController
             photos.push path
           end
         rescue
-          # do nothing for now... need to handle dropbox error
+          logger.error $!, $!.backtrace
         end
       end
     end
@@ -70,4 +84,60 @@ class HomeController < ApplicationController
       format.json { render :json => photos.to_json }
     end
   end
+  
+  def delete 
+    if session[:dropbox_session].nil? then
+      logger.debug 'no previous session available'
+      return redirect_to(:controller => 'home', :action => 'item')
+    else
+      logger.debug 'previous session found'
+      dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
+      dropbox_session.mode = :dropbox
+              
+      if dropbox_session.authorized? then
+        if params[:id] then
+          begin
+            logger.debug params[:id]
+            item = dropbox_session.file('/public/%s' % params[:id])
+            item.move('/public/archive/')
+            redirect_to url_for(:controller=>'home', :action => 'index')
+          rescue
+            logger.error $!, $!.backtrace
+          end
+        end
+      end
+    end
+  end
+  
+  def items 
+    if session[:dropbox_session].nil? then
+      logger.debug 'no previous session available'
+      return redirect_to(:controller => 'home', :action => 'item')
+    else
+      logger.debug 'previous session found'
+      dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
+      dropbox_session.mode = :dropbox
+              
+      if dropbox_session.authorized? then
+        item_numbers = Array.new
+
+        begin
+          metadata = dropbox_session.list('/public/')
+          metadata.each do |item|
+            # logger.debug item.inspect
+            path = item['path']
+            path['/Public/'] = ''# url_for(:controller => 'home', :action => 'index')
+            if(path.casecmp("archive") != 0 ) then
+              item_numbers.push path
+            end
+          end
+            logger.debug item_numbers.inspect
+          return item_numbers
+        rescue
+          logger.error $!, $!.backtrace
+        end
+      end
+    end
+  end
+  
 end

@@ -75,7 +75,7 @@ class HomeController < ApplicationController
             photos.push path
           end
         rescue
-          logger.error $!, $!.backtrace
+          # logger.error $!, $!.backtrace
         end
       end
     end

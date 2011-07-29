@@ -1,10 +1,22 @@
-<form id="itemLookup" method="get">
-  <fieldset>
-    <%= text_field_tag :itemNumber, params[:n], :placeholder => 'Enter Item #', :value => @id %>
-    <input type="submit" value="Go">
-  </fieldset>
-  <%= link_to "See All", :controller => "home", :action => "index"%>
-  <%= link_to "Delete", url_for(:controller => 'home', :action => 'delete', :id => @id), :id => "delete", :style => 'display:none;' %>
+<header>
+  <nav>
+    <%= link_to "< Back to List", :controller => "home", :action => "index"%>
+  </nav>
+  <div id="logout">
+    <a href="#">Logout</a>
+  </div>
+  <form id="itemLookup" method="get">
+    <fieldset>
+      <%= text_field_tag :itemNumber, params[:n], :placeholder => 'Enter Item #', :value => @id %>
+      <input type="submit" value="Go">
+    </fieldset>
+  </form>
 
-</form>
-<div id="container"></div>
+</header>
+<div id="messaging"></div>
+<article>
+  <h2 id="itemNumberLabel"></h2>
+  <div id="container"></div>
+  <%= link_to 'Delete Item', url_for(:controller=>'home', :action=>'delete', :id=>@id), :id=>'delete', :style=>'display:none' %>
+</article>
+<%= javascript_include_tag 'jquery.galleriffic', 'jquery.opacityrollover', 'application' %>

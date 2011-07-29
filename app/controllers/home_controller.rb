@@ -123,12 +123,16 @@ class HomeController < ApplicationController
 
         begin
           metadata = dropbox_session.list('/public/')
+          Struct.new("Item", :number, :date)
           metadata.each do |item|
             # logger.debug item.inspect
-            path = item['path']
-            path['/Public/'] = ''# url_for(:controller => 'home', :action => 'index')
-            if(path.casecmp("archive") != 0 ) then
-              item_numbers.push path
+            logger.debug item
+
+            number = item['path']
+            number['/Public/'] = ''# url_for(:controller => 'home', :action => 'index')
+            date = item['modified']
+            if(number.casecmp("archive") != 0 ) then
+              item_numbers.push Struct::Item.new(number, date.strftime("%b %d, %Y"))
             end
           end
             logger.debug item_numbers.inspect

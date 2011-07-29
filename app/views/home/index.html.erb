@@ -1,10 +1,78 @@
-<h2>All Items</h2>
-<%= link_to '', url_for(:controller => "home", :action => "item"), :id=>"search", :title=>"Search" %>
-
-<ul id="itemsUl">
-  <% @items.each do |item|  %>
+<header>
+  <nav id="title">
+    <h1>Snap!</h1>
+  </nav>
+  <div id="logout">
+    <a href="#">Logout</a>
+  </div>
+  <form id="itemLookup" method="get">
+    <fieldset>
+      <%= text_field_tag :itemNumber, params[:n], :placeholder => 'Enter Item #', :value => @id %>
+      <input type="submit" value="Go">
+    </fieldset>
+  </form>
+</header>
+<div id="messaging"></div>
+<article>
+  <ul id="itemsUl">
     <li>
-      <%= link_to item, :controller => "home", :action => "item", :id=> item %>
+      <span><a href="#" onClick="javascript:sort('number','desc')">Item Number</a></span>
+      <span><a href="#" onClick="javascript:sort('date','desc')">Date</a></span>
     </li>
-  <% end %>
-</ul>
+    <% @items.each do |item|  %>
+      <li>
+        <%= link_to :controller => "home", :action => "item", :id=> item[:number]  do%>
+          <span tag="number"><%= item[:number] %></span>
+          <span tag="date"><%= item[:date] %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</article>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#itemLookup').submit(function( e ) {
+      if( e ) { e.preventDefault(); }
+      var itemNum = $('#itemNumber').val().trim();
+      if(itemNum.length > 0){
+        window.location.replace("<%= url_for :controller => "home", :action => "item", :id=> "" %>"+itemNum);
+      }
+    });
+  });
+  function sort(attr, order){
+    if(order === 'desc'){
+      $(event.srcElement).attr('onClick','javascript:sort("'+attr+'","asce")');
+    }
+    else{
+      $(event.srcElement).attr('onClick','javascript:sort("'+attr+'","desc")');
+    }
+    
+  // sort by number asecending
+    var items = $('#itemsUl li:not(:first)').get();
+    items.sort(function(a,b){
+
+      var keyA, keyB;
+      if(attr === 'number'){
+        keyA= parseFloat($(a).children('a').children('[tag="'+attr+'"]').text());
+        keyB = parseFloat($(b).children('a').children('[tag="'+attr+'"]').text());
+      }
+      else{
+        keyA= new Date($(a).children('a').children('[tag="'+attr+'"]').text());
+        keyB = new Date($(b).children('a').children('[tag="'+attr+'"]').text());
+      }
+      if (keyA < keyB){
+        if(order === 'desc') return 1;
+        else return -1;
+      }
+      if (keyA > keyB){
+        if(order === 'desc') return -1;
+        else return 1;
+      }
+      return 0;
+    });
+    var ul = $('#itemsUl');
+    $.each(items, function(i, li){
+      ul.append(li);
+    });
+  }
+</script>

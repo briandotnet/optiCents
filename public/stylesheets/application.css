@@ -6,51 +6,155 @@
 
 article {
   margin: 0 auto;
-  width: 800px;
+  
 }
 
 body {
   font: 16px/1 Calibri, Helvetica, Arial, sans-serif;
+  min-width: 960px;
 }
 
+
+h1{
+    font-size: 30px;
+    font-weight: normal;
+}
+
+h2{
+    display:inline-block;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+    width: 232px;
+    margin: 20px 20px 0;
+}
+
+  /******************/
+ /****  HEADER  ****/
+/******************/
+
 header {
-  height: 50px;
-  line-height: 50px;
-  background-color: #222;
+  background-color:#444;
   color: #eee;
+  text-align: center;
+  display:block;
+
+}
+header #title{
+    background-color: #000;
+    padding-top:28px;
+    padding-bottom:29px;
+}
+header a{
+  color:#FFF;
+  text-decoration:none;
+}
+header a:hover{
+    color:#DDD
+}
+nav {
+    float: left;
+    padding: 35px;
+}
+  /*************************/
+ /****   LOOKUP FORM   ****/
+/*************************/
+#itemLookup > fieldset {
+  border: 0;
+  padding: 20px;
   text-align: center;
 }
 
+#itemLookup input {
+  border: 1px solid transparent;
+  padding: 5px;
+  font-size: 30px;
+}
 
-h2{
-  text-align:center;
+#itemLookup input[type="text"] {
+  border-color: #ccc;
+}
+
+#itemLookup input[type="text"]:focus {
+  background-color: #ffc;
+  outline: 0;
+}
+
+#itemLookup input[type="submit"] {
   background-image: -webkit-gradient(
     linear,
     left top,
     left bottom,
-    from(#eee),
-    to(#fff)
+    from(#666),
+    to(#222)
   );
-  font-size:30px;
-  line-height: 87px;
-
+  color: #eee;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+#itemLookup input[type="submit"]:hover {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#555),
+    to(#111)
+  );
 }
 
-  /*********************/
+#itemLookup a {
+  position: relative;
+  top: -35px;
+  right: 160px;
+  color: black;
+  text-decoration: none;
+  float: right;
+}
+#itemLookup a:hover{
+  color:#000;
+}
+
+  /********************/
  /****   LOGOUT   ****/
 /********************/
-#logout{
-  display:block; 
-  position: absolute; 
-  top: 0; 
-  right:0; 
-  width:100px; 
-  height:50px; 
-  color:white; 
-  text-decoration:none;
+#logout {
+    float:right;
+    padding: 35px;
 }
-#logout:hover{
-  color:#F99;
+#logout > a:hover{
+  color:#F77;
+}
+
+  /********************/
+ /****   DELETE   ****/
+/********************/
+#delete{
+    text-decoration: none;
+    display:inline-block;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+    width: 200px;
+    margin: 20px 20px 0;border-radius: 5px;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from( #F77),
+        to( #F44)
+    );
+    color:#FFF;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+}
+#delete:hover{
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from( #F55),
+        to( #F22)
+    );
+    text-shadow: 0 -1px 0 rgba(10,10,10,0.5);
 }
 
   /***************************/
@@ -90,12 +194,12 @@ h2{
 
 #itemsUl{
   list-style: none;
-  width: 600px;
-  margin: 0px auto 50px;
+  margin: 20px;
 }
+
 #itemsUl > li{
   margin:3px 0;
-  border:1px solid transparent;
+  border:none;
   padding: 5px 20px;
   background-image: -webkit-gradient(
     linear,
@@ -105,8 +209,8 @@ h2{
     to(#ddd)
   );
 }
+
 #itemsUl > li:hover{
-  border:1px solid #eee;
   background-image: -webkit-gradient(
     linear,
     left top,
@@ -115,89 +219,33 @@ h2{
     to(#eee)
   );
 }
-#itemsUl a {
-  display:block;
-  text-decoration: none;
-  color: #000;
-  font-size:30px;
-}
-#search {
-  float: right;
-  width: 32px;
-  height: 32px;
-  background-image: url('http://cdn1.iconfinder.com/data/icons/Snow/Snow/snow/Search.png');
-  left: -300px;
-  top: -60px;
-  position: relative;
-}
 
-  /*********************/
- /****   LOGOUT   ****/
-/********************/
-#container{
-  padding: 0 80px;
-}
-
-  /*************************/
- /****   LOOKUP FORM   ****/
-/*************************/
-#itemLookup > fieldset {
-  border: 0;
-  padding: 20px;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#eee),
-    to(#fff)
-  );
-  text-align: center;
-}
-
-#itemLookup input {
-  border: 1px solid transparent;
-  padding: 5px;
-  font-size: 30px;
-}
-
-#itemLookup input[type="text"] {
-  border-color: #ccc;
-}
-
-#itemLookup input[type="text"]:focus {
-  background-color: #ffc;
-  outline: 0;
-}
-
-#itemLookup input[type="submit"] {
-  background-image: -webkit-gradient(
+#itemsUl > li:first-child, li:first-child:hover {
+    color: white;
+    font-size: 24px;
+    line-height: 30px;
+    background-image: -webkit-gradient(
     linear,
     left top,
     left bottom,
     from(#666),
     to(#222)
   );
-  color: #eee;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
-  cursor: pointer;
 }
-
-#itemLookup a {
-  position: relative;
-  top: -35px;
-  right: 160px;
-  color: black;
+#itemsUl a {
+  display:block;
   text-decoration: none;
-  float: right;
+  color: #000;
+  font-size:30px;
 }
-#itemLookup a:hover{
-  color:#000;
+#itemsUl span{
+    width: 350px;
+    display: inline-block;
 }
-
-#itemLookup a#delete{
-  color:#f99;
-  right: 0;
+#itemsUl > li:first-child a{
+    display:inline;
+    color:#FFF;
 }
-#itemLookup a#delete:hover{
-  color:#f00;
+#itemsUl > li:first-child a:hover{
+    text-decoration: underline;
 }

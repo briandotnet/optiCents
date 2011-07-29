@@ -5,14 +5,9 @@
   <%= csrf_meta_tag %>
   <title>Snap!</title>
   <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag 'jquery.min' %>
 </head>
   <body>
-    <header>
-      <h1>Snap!</h1>
-      <a id="logout" href="#">Logout</a>
-    </header>
-    <div id="messaging"></div>
-    <article><%= yield %></article>
-    <%= javascript_include_tag 'jquery.min', 'slideViewerPro.1.0', 'application' %>
+    <%= yield %>
   </body>
 </html>

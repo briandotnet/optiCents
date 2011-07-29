@@ -26,14 +26,12 @@
       else {
         $("#itemNumberLabel").empty().append(id)
         var gallery = $('<div/>', { id: 'gallery', 'class':'content'});
-        var controls = $('<div/>',{id:'controls', 'class':'controls'});
         var slideshowContainer = $('<div/>', {'class':'slideshow-container'});
         var loading = $('<div/>', { id: 'loading','class':'loader'});
         var slideshow = $('<div/>', { id: 'slideshow','class':'slideshow'});
         var thumbs = $('<div/>', { id: 'thumbs','class':'navigation'});
 
         slideshowContainer.append(loading).append(slideshow);
-        gallery.append(controls);
         gallery.append(slideshowContainer);
         
         var items = [];
@@ -51,7 +49,7 @@
         
         
         // We only want these styles applied when javascript is enabled
-        $('div.navigation').css({'width' : '240px', 'float' : 'left', 'margin':'20px'});
+        $('div.navigation').css({'width' : '240px', 'float' : 'left', 'margin':'0 20px'});
         $('div.content').css('display', 'block');
 
         // Initially set opacity on thumbs and add
@@ -92,6 +90,7 @@
                 onTransitionIn:            function(slide, caption, isSync) {
                     slide.fadeTo('slow',1.0);
                     $('#slideshow img').attr('width','640').attr('height','640');
+                    
                 },
                 onPageTransitionOut:       function(callback) {
                         this.fadeTo('fast', 0.0, callback);

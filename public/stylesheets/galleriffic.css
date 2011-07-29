@@ -2,7 +2,7 @@ div.content {
 	/* The display of content is enabled using jQuery so that the slideshow content won't display unless javascript is enabled. */
 	display: none;
 	float: left;
-	width: 650px;
+	width: 642px;
 }
 div.content a, div.navigation a {
 	text-decoration: none;
@@ -27,7 +27,7 @@ div.nav-controls {
 div.slideshow-container {
 	position: relative;
 	clear: both;
-	height: 650px; /* This should be set to be at least the height of the largest image in the slideshow */
+	height: 642px; /* This should be set to be at least the height of the largest image in the slideshow */
 }
 div.loader {
 	position: absolute;
@@ -36,8 +36,8 @@ div.loader {
 	background-image: url('/images/loader.gif');
 	background-repeat: no-repeat;
 	background-position: center;
-	width: 650px;
-	height: 650px; /* This should be set to be at least the height of the largest image in the slideshow */
+	width: 642px;
+	height: 642px; /* This should be set to be at least the height of the largest image in the slideshow */
 }
 div.slideshow {
 
@@ -49,10 +49,9 @@ div.slideshow span.image-wrapper {
 	left: 0;
 }
 div.slideshow a.advance-link {
-	display: block;
-	width: 650px;
-	height: 650px; /* This should be set to be at least the height of the largest image in the slideshow */
-	line-height: 650px; /* This should be set to be at least the height of the largest image in the slideshow */
+	width: 642px;
+	height: 642px; /* This should be set to be at least the height of the largest image in the slideshow */
+	line-height: 642px; /* This should be set to be at least the height of the largest image in the slideshow */
 	text-align: center;
 }
 div.slideshow a.advance-link:hover, div.slideshow a.advance-link:active, div.slideshow a.advance-link:visited {

@@ -75,6 +75,7 @@ class HomeController < ApplicationController
             photos.push path
           end
         rescue
+          # this line throw error on heroku but not in localhost
           # logger.error $!, $!.backtrace
         end
       end
@@ -112,7 +113,7 @@ class HomeController < ApplicationController
   def items 
     if session[:dropbox_session].nil? then
       logger.debug 'no previous session available'
-      return redirect_to(:controller => 'home', :action => 'item')
+      redirect_to(:controller => 'home', :action => 'item') and return
     else
       logger.debug 'previous session found'
       dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])

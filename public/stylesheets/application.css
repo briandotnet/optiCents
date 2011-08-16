@@ -200,29 +200,25 @@ nav {
   margin:3px 0;
   border:none;
   padding: 5px 20px;
-  background-image: -webkit-gradient(
+  border-bottom: solid gray 2px;
+/*  background-image: -webkit-gradient(
     linear,
     left top,
     left bottom,
     from(#eee),
     to(#ddd)
-  );
+  );*/
 }
 
 #itemsUl > li:hover{
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#ddd),
-    to(#eee)
-  );
+
 }
 
 #itemsUl > li:first-child, li:first-child:hover {
     color: white;
     font-size: 24px;
     line-height: 30px;
+    border:none;
     background-image: -webkit-gradient(
     linear,
     left top,

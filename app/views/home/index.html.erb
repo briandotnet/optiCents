@@ -29,6 +29,7 @@
     <% end %>
   </ul>
 </article>
+<%= javascript_include_tag 'jquery.cookie' %>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#itemLookup').submit(function( e ) {
@@ -38,8 +39,15 @@
         window.location.replace("<%= url_for :controller => "home", :action => "item", :id=> "" %>"+itemNum);
       }
     });
+    if($.cookie('sort_by') != null && $.cookie('sort_order') != null)
+    {
+      sort($.cookie('sort_by'),$.cookie('sort_order'));
+    }
   });
   function sort(attr, order){
+    $.cookie('sort_by', attr);
+    $.cookie('sort_order', order);
+
     if(order === 'desc'){
       $(event.srcElement).attr('onClick','javascript:sort("'+attr+'","asce")');
     }

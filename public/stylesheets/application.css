@@ -123,92 +123,6 @@ nav {
   color:#F77;
 }
 
-
-  /******************************/
- /****   DELETE COMPLETED   ****/
-/******************************/
-#delete_completed {
-  float:right;
-  padding: 35px;
-}
-#delete_completed > a {
-  text-decoration: underline;
-  font-weight: bold;
-}
-
-#delete_completed > a:hover{
-  color:#F77;
-}
-
-
-  /**************************/
- /****   ITEM DETAILS   ****/
-/**************************/
-
-#item_actions fieldset {
-  border:none;
-}
-
-#item_details {
-  text-decoration: none;
-  display: inline-block;
-  text-align: left;
-  font-size: 20px;
-  line-height: 30px;
-  width: 200px;
-  margin: 1px 10px;
-  border-radius: 5px;
-  background-image: -webkit-gradient( linear, left top, left bottom, from( #dddddd), to( #bbbbbb) );
-  color: black;
-  padding: 10px;
-}
-
-#comments{
-  height:150px;
-  width:195px;
-}
-
-#product_materials{
-  width:195px;
-}
-div#item_details input#done {
-  margin-left:10px;
-}
-
-  /***********************/
- /****   SAVE ITEM   ****/
-/***********************/
-#save{
-  text-decoration: none;
-  display:inline-block;
-  text-align: center;
-  font-size: 30px;
-  line-height: 40px;
-  width: 200px;
-  margin: 10px 0px;
-  border-radius: 5px;
-  background-image: -webkit-gradient(
-  linear,
-  left top,
-  left bottom,
-  from( #00F770),
-  to( #00F440)
-  );
-  color:#FFF;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
-}
-#save:hover{
-  background-image: -webkit-gradient(
-  linear,
-  left top,
-  left bottom,
-  from( #00F550),
-  to( #00F220)
-  );
-  text-shadow: 0 -1px 0 rgba(10,10,10,0.5);
-}
-
-
   /********************/
  /****   DELETE   ****/
 /********************/
@@ -219,7 +133,7 @@ div#item_details input#done {
     font-size: 30px;
     line-height: 40px;
     width: 200px;
-    margin: 10px 0px;
+    margin: 1px 20px;
     border-radius: 5px;
     background-image: -webkit-gradient(
         linear,
@@ -323,19 +237,10 @@ div#item_details input#done {
     width: 350px;
     display: inline-block;
 }
-#itemsUl span.done{
-  width: 100px;
-}
-
 #itemsUl > li:first-child a{
     display:inline;
     color:#FFF;
 }
 #itemsUl > li:first-child a:hover{
     text-decoration: underline;
-}
-
-input#done {
-  -webkit-appearance: checkbox;
-  margin-left: 30px;
 }

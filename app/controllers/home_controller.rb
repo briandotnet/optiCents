@@ -36,7 +36,7 @@ class HomeController < ApplicationController
         dropbox_session = Dropbox::Session.new(app_key, app_secret)
         session[:dropbox_session] = dropbox_session.serialize
 
-        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item')) and return
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index')) and return
       else # user landed with previous dropbox_session
         logger.debug "use previous session"
         dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
@@ -45,7 +45,7 @@ class HomeController < ApplicationController
         if !dropbox_session.authorized? then 
           # dropbox_session is not authorized
           logger.debug "redirect to dropbox oauth page"
-          redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item')) and return
+          redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index')) and return
         else 
           begin
             file_contents = dropbox_session.download('/public/%s/details.xml' % params[:id])

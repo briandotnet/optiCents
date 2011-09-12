@@ -24,7 +24,7 @@ class HomeController < ApplicationController
         end
       rescue
         # can't authorize, probably expired token, redirect to login
-        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item')) and return
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'index')) and return
       end
       session[:dropbox_session] = dropbox_session.serialize # re-serialize the authenticated dropbox_session 
     else

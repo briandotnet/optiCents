@@ -24,7 +24,7 @@ class HomeController < ApplicationController
         end
       rescue
         # can't authorize, probably expired token, redirect to login
-        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item'))
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item')) and return
       end
       session[:dropbox_session] = dropbox_session.serialize # re-serialize the authenticated dropbox_session 
     else
@@ -36,7 +36,7 @@ class HomeController < ApplicationController
         dropbox_session = Dropbox::Session.new(app_key, app_secret)
         session[:dropbox_session] = dropbox_session.serialize
 
-        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item'))
+        redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item')) and return
       else # user landed with previous dropbox_session
         logger.debug "use previous session"
         dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
@@ -45,7 +45,7 @@ class HomeController < ApplicationController
         if !dropbox_session.authorized? then 
           # dropbox_session is not authorized
           logger.debug "redirect to dropbox oauth page"
-          redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item'))
+          redirect_to dropbox_session.authorize_url(:oauth_callback => url_for(:controller => 'home', :action => 'item')) and return
         else 
           begin
             file_contents = dropbox_session.download('/public/%s/details.xml' % params[:id])
@@ -199,7 +199,7 @@ class HomeController < ApplicationController
               @file.unlink   # deletes the temp file
             end
             
-            redirect_to url_for(:controller=>'home', :action => 'index')
+            redirect_to url_for(:controller=>'home', :action => 'index') and return
           rescue
             logger.error $!, $!.backtrace
           end
@@ -223,7 +223,7 @@ class HomeController < ApplicationController
             logger.debug params[:id]
             item = dropbox_session.file('/public/%s' % params[:id])
             item.move('/public/archive/')
-            redirect_to url_for(:controller=>'home', :action => 'index')
+            redirect_to url_for(:controller=>'home', :action => 'index') and return
           rescue
             logger.error $!, $!.backtrace
           end

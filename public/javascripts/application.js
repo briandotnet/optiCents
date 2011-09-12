@@ -76,6 +76,7 @@
                 loadingContainerSel:       '#loading',
                 renderSSControls:          false,
                 renderNavControls:         false,
+                enableKeyboardNavigation:  false,
                 nextPageLinkText:          'Next &rsaquo;',
                 prevPageLinkText:          '&lsaquo; Prev',
                 enableHistory:             false,

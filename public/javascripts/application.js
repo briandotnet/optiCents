@@ -43,10 +43,11 @@
 
         container.empty().append(thumbs).append(gallery);
 
-        // show delete button
+        // show complete & delete button
         $('#delete').attr('href','/home/delete?id='+id);
         $('#delete, h2').fadeIn('slow');
-        
+        $('#done').attr('href','/home/done?id='+id);
+        $('#done, h2').fadeIn('slow');
         
         // We only want these styles applied when javascript is enabled
         $('div.navigation').css({'width' : '240px', 'float' : 'left', 'margin':'0 20px'});
@@ -108,15 +109,18 @@
 
   // catch all form submissions and proxy them through an AJAX request
   $(document).ready(function() {
-    $('#itemLookup').submit(function( e ) {
-      if( e ) { e.preventDefault(); }
-      if($('#itemNumber').val().trim().length > 0){
-        getPhotos($('#itemNumber').val().trim());
-      }
-    });
+    //$('#itemLookup').submit(function( e ) {
+      //if( e ) { e.preventDefault(); }
+      //if($('#itemNumber').val().trim().length > 0){
+        //getPhotos($('#itemNumber').val().trim());
+      //}
+    //});
     // load item if id is already specified
     if($('#itemNumber').val().trim().length > 0){
       getPhotos($('#itemNumber').val().trim());
     }
   });
+  
+  
+  
 })(jQuery);

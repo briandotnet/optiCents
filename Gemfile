@@ -31,3 +31,4 @@ gem 'sqlite3'
 # end
 
 gem "dropbox", "~> 1.2.3"
+gem "plist", "~> 3.1.0"

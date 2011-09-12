@@ -5,6 +5,9 @@
   <div id="logout">
     <a href="#">Logout</a>
   </div>
+  <div id="delete_completed">
+    <a href="#">Delete Completed</a>
+  </div>
   <form id="itemLookup" method="get">
     <fieldset>
       <%= text_field_tag :itemNumber, params[:n], :placeholder => 'Enter Item #', :value => @id %>
@@ -16,12 +19,14 @@
 <article>
   <ul id="itemsUl">
     <li>
+      <span class="done"><a href="#" onClick="javascript:sort('done','desc')">Done</a></span>
       <span><a href="#" onClick="javascript:sort('number','desc')">Item Number</a></span>
       <span><a href="#" onClick="javascript:sort('date','desc')">Date</a></span>
     </li>
     <% @items.each do |item|  %>
       <li>
         <%= link_to :controller => "home", :action => "item", :id=> item[:number]  do%>
+          <span tag="done" class="done"><%= check_box_tag 'done', 'yes', item[:done] %></span>
           <span tag="number"><%= item[:number] %></span>
           <span tag="date"><%= item[:date] %></span>
         <% end %>
@@ -36,7 +41,8 @@
       if( e ) { e.preventDefault(); }
       var itemNum = $('#itemNumber').val().trim();
       if(itemNum.length > 0){
-        window.location.replace("<%= url_for :controller => "home", :action => "item", :id=> "" %>"+itemNum);
+        //window.location.replace("<%= url_for :controller => "home", :action => "item", :id=> "" %>"+itemNum);
+        location.href = "<%= url_for :controller => "home", :action => "item", :id=> "" %>"+itemNum;
       }
     });
     if($.cookie('sort_by') != null && $.cookie('sort_order') != null)

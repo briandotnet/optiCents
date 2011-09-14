@@ -201,8 +201,9 @@ class HomeController < ApplicationController
             end
             
             redirect_to url_for(:controller=>'home', :action => 'index') and return
-          rescue
-            logger.error $!, $!.backtrace
+          rescue => e
+            logger.error e.message
+            e.backtrace.each { |line| logger.error line }
           end
         end
       end

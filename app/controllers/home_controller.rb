@@ -188,11 +188,7 @@ class HomeController < ApplicationController
               @file.print @contents
               @file.flush
               
-              begin 
-                dropbox_session.delete('/public/%s/details.xml' % params[:id])
-              rescue
-                # compress error, delete may fail because details.xml may not exist.
-              end
+              dropbox_session.delete('/public/%s/details.xml' % params[:id])
               logger.debug "TEMPORARY FILE PATH: %s" % @file.path
               dropbox_session.upload("%s" % @file.path, '/public/%s/' % params[:id])
               filename = "%s" % @file.path

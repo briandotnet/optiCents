@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @sale.item_id %>
+</p>
+
+<p>
+  <b>Sale type:</b>
+  <%= @sale.sale_type_id %>
+</p>
+
+<p>
+  <b>Flyer:</b>
+  <%= @sale.flyer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_sale_path(@sale) %> |
+<%= link_to 'Back', sales_path %>

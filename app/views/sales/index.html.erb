@@ -1,0 +1,27 @@
+<h1>Listing sales</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Sale type</th>
+    <th>Flyer</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sales.each do |sale| %>
+  <tr>
+    <td><%= sale.item_id %></td>
+    <td><%= sale.sale_type_id %></td>
+    <td><%= sale.flyer_id %></td>
+    <td><%= link_to 'Show', sale %></td>
+    <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    <td><%= link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sale', new_sale_path %>

@@ -1,11 +1,15 @@
 Snap::Application.routes.draw do
     
-  get "home/item"
-  get "home/index"
-  get "home/photos"
-  get "home/delete"
-  get "home/details"
-  get "home/save"
+  resources :sales
+
+  resources :sale_types
+
+  resources :items
+
+  resources :flyers
+
+  resources :stores
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -56,7 +60,7 @@ Snap::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#item"
+  root :to => "stores#index"
   
   # See how all your routes lay out with "rake routes"
 

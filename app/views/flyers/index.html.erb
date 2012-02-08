@@ -1,0 +1,29 @@
+<h1>Listing flyers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Store</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @flyers.each do |flyer| %>
+  <tr>
+    <td><%= flyer.name %></td>
+    <td><%= flyer.store_id %></td>
+    <td><%= flyer.start_date %></td>
+    <td><%= flyer.end_date %></td>
+    <td><%= link_to 'Show', flyer %></td>
+    <td><%= link_to 'Edit', edit_flyer_path(flyer) %></td>
+    <td><%= link_to 'Destroy', flyer, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Flyer', new_flyer_path %>

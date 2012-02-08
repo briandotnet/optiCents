@@ -7,6 +7,7 @@ class CreateStores < ActiveRecord::Migration
       t.string :province
       t.string :postal_code
       t.string :phone
+      t.string :description
       t.float :lat
       t.float :lng
 

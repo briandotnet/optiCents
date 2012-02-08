@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20120208000234) do
     t.string   "province"
     t.string   "postal_code"
     t.string   "phone"
+    t.string   "description"
     t.float    "lat"
     t.float    "lng"
     t.datetime "created_at"

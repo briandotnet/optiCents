@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @items }
+      format.json  { render :json => @items }
     end
   end
 
@@ -18,6 +19,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @item }
+      format.json  { render :json => @item }
     end
   end
 

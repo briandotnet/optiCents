@@ -1,4 +1,5 @@
 class StoresController < ApplicationController
+  include Geokit::Geocoders
   # GET /stores
   # GET /stores.xml
   def index
@@ -80,6 +81,57 @@ class StoresController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(stores_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  # GET /stores/find
+  # GET /stores/find.json
+  def find
+    # get within
+    within = params.has_key?('within') ?  params['within'] : 10
+    # get origin
+    if params.has_key?('lat') && params.has_key?('lng')
+      origin = [params['lat'], params['lng']]
+      centre = {:lat => params['lat'], :lng => params['lng']}
+    elsif params.has_key?('address')
+      origin = params['address']
+      
+      res=MultiGeocoder.geocode(params['address'])
+      if(res.success)
+        centre = {:lat=>res.lat,:lng=>res.lng, :address => res.full_address }
+      else  
+          centre = nil;
+      end
+      
+    elsif params.has_key?('ne_lat') && params.has_key?('ne_lng') && params.has_key?('sw_lat') && params.has_key?('sw_lng')
+      ne_point = [params['ne_lat'], params['ne_lng']]
+      sw_point = [params['sw_lat'], params['sw_lng']]
+      bounds = [sw_point, ne_point];
+    else
+      raise "you need to specify lat and lng, or address, or bounds"
+    end
+    if origin != nil 
+       begin
+        @stores = Store.find(:all, :origin => origin, :within => within, :order=>'distance asc')
+       rescue => error
+        respond_to do |format|
+          format.html{
+            return
+          }
+          format.json{
+            render :json => error.inspect# "{\"error\":\""+origin+" is invalid origin\"}"
+            return
+          }
+        end
+       end
+    else
+      @clubs = Club.find :all, :bounds=>bounds
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @stores }
+      format.json  { render :json => @stores }
     end
   end
 end

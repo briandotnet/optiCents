@@ -7,6 +7,7 @@ class FlyersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @flyers }
+      format.json  { render :json => @flyers }
     end
   end
 
@@ -18,6 +19,7 @@ class FlyersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @flyer }
+      format.json  { render :json => @flyer }
     end
   end
 

@@ -1,5 +1,7 @@
 Snap::Application.routes.draw do
     
+  resources :store_chains
+
   resources :sales
 
   resources :sale_types
@@ -8,7 +10,11 @@ Snap::Application.routes.draw do
 
   resources :flyers
 
-  resources :stores
+  resources :stores do 
+    collection do 
+      get 'find'
+    end 
+  end
 
   
   # The priority is based upon order of creation:

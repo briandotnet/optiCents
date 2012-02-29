@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Store Chain</th>
     <th>Name</th>
     <th>Street address</th>
     <th>City</th>
@@ -18,6 +19,7 @@
 
 <% @stores.each do |store| %>
   <tr>
+    <td><%= store.store_chain_name %></td>
     <td><%= store.name %></td>
     <td><%= store.street_address %></td>
     <td><%= store.city %></td>

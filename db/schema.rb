@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214211758) do
+ActiveRecord::Schema.define(:version => 20120304000817) do
 
   create_table "flyers", :force => true do |t|
     t.string   "name"
@@ -24,11 +24,13 @@ ActiveRecord::Schema.define(:version => 20120214211758) do
   create_table "items", :force => true do |t|
     t.string   "name"
     t.string   "brand"
-    t.integer  "quantity"
     t.text     "description"
     t.float    "regular_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "store_chain_id"
+    t.string   "category"
+    t.string   "quantity"
   end
 
   create_table "sale_types", :force => true do |t|

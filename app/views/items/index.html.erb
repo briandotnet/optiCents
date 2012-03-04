@@ -2,7 +2,9 @@
 
 <table>
   <tr>
+    <th>Store Chain</th>
     <th>Name</th>
+    <th>Category</th>
     <th>Brand</th>
     <th>Quantity</th>
     <th>Description</th>
@@ -14,7 +16,9 @@
 
 <% @items.each do |item| %>
   <tr>
+    <td><%= item.store_chain_name %></td>
     <td><%= item.name %></td>
+    <td><%= item.category %></td>
     <td><%= item.brand %></td>
     <td><%= item.quantity %></td>
     <td><%= item.description %></td>

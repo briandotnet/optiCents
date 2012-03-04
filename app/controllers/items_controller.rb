@@ -82,4 +82,35 @@ class ItemsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def find
+    name = params.has_key?('name') ?  "name LIKE '%" + params['name'] + "%'" : ""
+    category = params.has_key?('category') ?  "category = '" + params['category'] + "'" : ""
+    brand = params.has_key?('brand') ?  "brand LIKE '%" + params['brand'] + "%'" : ""
+    conditions = Array[] 
+    if name != ""
+      conditions.push(name)
+    end
+    if category != ""
+      conditions.push(category)
+    end
+    if brand != ""
+      conditions.push(brand)
+    end
+    # if conditions.count > 0
+      @items = Item.all(:limit => 100, :conditions => conditions.join(' AND '))
+    # else
+      # @items = Array[]
+    # end
+    respond_to do |format|
+      format.json  { render :json => @items }
+    end
+  end
+  
+  def category
+    @categories = Item.find_by_sql(["SELECT DISTINCT(category) FROM items"])
+    respond_to do |format|
+      format.json  { render :json => @categories }
+    end
+  end
 end

@@ -6,7 +6,12 @@ Snap::Application.routes.draw do
 
   resources :sale_types
 
-  resources :items
+  resources :items do
+      collection do 
+        get 'find'
+        get 'category'
+      end 
+    end
 
   resources :flyers
 
